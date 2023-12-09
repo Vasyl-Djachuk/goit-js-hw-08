@@ -108,7 +108,6 @@ function galleryClick(event) {
 }
 
 function closeModalBykey(event) {
-  console.log(event.code);
   if (event.code === `Escape`) {
     modal.close();
     document.removeEventListener(`keydown`, closeModalBykey);
