@@ -19,4 +19,8 @@ body {
 .gallery-image {
   width: 360px;
   height: 200px;
+  transition: transform 0.25s linear;
+}
+.gallery-image:hover {
+  transform: scale(1.045);
 }

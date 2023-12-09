@@ -64,8 +64,6 @@ const images = [
   },
 ];
 
-const gallery = document.querySelector(`.gallery`);
-
 const items = [];
 
 images.forEach(image => {
@@ -87,6 +85,8 @@ images.forEach(image => {
   item.append(link);
   items.push(item);
 });
+
+const gallery = document.querySelector(`.gallery`);
 gallery.append(...items);
 
 const download = document.querySelectorAll(`.gallery-link`);
@@ -96,6 +96,24 @@ download.forEach(links =>
 
 gallery.addEventListener(`click`, galleryClick);
 
+let modal;
 function galleryClick(event) {
-  console.log(event.target.nodeName);
+  if (event.target.nodeName === `IMG`) {
+    modal = basicLightbox.create(
+      `<img src=${event.target.dataset.source} width="800" height="600">`
+    );
+    modal.show();
+    document.addEventListener(`keydown`, closeModalBykey);
+  }
+}
+
+function closeModalBykey(event) {
+  console.log(event.code);
+  if (event.code === `Escape`) {
+    modal.close();
+    document.removeEventListener(`keydown`, closeModalBykey);
+  }
+  if (modal.visible() === false) {
+    document.removeEventListener(`keydown`, closeModalBykey);
+  }
 }
